@@ -26,7 +26,7 @@ To test a solution using [dredd](https://dredd.h4x0r.space/), simply run: `./dre
 
 `dredd_test.sh` automatically detects the corresponding exercise to the solution based on the parent directory of the source file and submits the solution to dredd; thus, all source files should be placed accordingly.
 
-### Local Testing
+### Local Testing (Pending)
 
 Similarly, to test a solution locally based on the available test cases, simply run: `./local_test.sh source_file ...`
 
