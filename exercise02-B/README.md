@@ -41,7 +41,7 @@ td {
     </tbody>
 </table>
 
-Note, the output should include the input string padded to the right to a length of 10.
+> Note, the output should include the input string padded to the right to a length of 10.
 
 ### Dredd Testing
 
