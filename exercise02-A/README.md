@@ -2,6 +2,8 @@
 
 Given two words, determine if they are anagrams (ignore capitalization).
 
+> Note: Try avoiding an associative array (map, dictionary).
+
 <style>
 td {
   vertical-align: top;
