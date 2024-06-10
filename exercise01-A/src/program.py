@@ -9,7 +9,7 @@ import sys
 
 def main():
     for line in sys.stdin:
-        print(sum(map(int, line.split())))
+        print(sum([int(s) for s in line.split()]))
 
 
 if __name__ == "__main__":
