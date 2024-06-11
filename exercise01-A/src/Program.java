@@ -1,3 +1,5 @@
+// Exercise 01-A: Line Totals
+
 import java.util.Scanner;
 
 public class Program {

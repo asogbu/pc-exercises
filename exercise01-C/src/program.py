@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# Exercise 01-C: Count Duplicates
+
 import sys
 
 # Functions

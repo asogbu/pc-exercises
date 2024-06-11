@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Exercise 01-A: Line Totals
+
 while read -r line; do
     sum=0
 

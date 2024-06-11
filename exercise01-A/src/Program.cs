@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Exercise 01-A: Line Totals
+
+using System;
 using System.Linq;
 
 class Program
