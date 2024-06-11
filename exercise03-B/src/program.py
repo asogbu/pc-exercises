@@ -8,9 +8,11 @@ import sys
 # Functions
 
 
-def compare_numbers(a: str, b: str) -> bool:
-    # TODO: Compare a and b
-    return False
+def compare_numbers(a: str, b: str) -> int:
+    ab = int(a + b)
+    ba = int(b + a)
+
+    return ab - ba
 
 
 # Main execution
@@ -18,7 +20,8 @@ def compare_numbers(a: str, b: str) -> bool:
 
 def main():
     sort_key = functools.cmp_to_key(compare_numbers)
-    # TODO: Read numbers, sort, and print
+    while words := sys.stdin.readline().split():
+        print("".join(sorted(words, key=sort_key, reverse=True)))
 
 
 if __name__ == "__main__":
