@@ -1,5 +1,14 @@
 #!/bin/sh
 
+if [[ $DEBUG == 1 ]]; then
+   DREDD_CODE_SLUG="debug"
+else
+   DREDD_CODE_SLUG="code"
+fi
+
+DREDD_CODE_URL="https://dredd.h4x0r.space/$DREDD_CODE_SLUG/cse-30872-su24"
+
+
 for source_path in $@; do
     # echo source_path: $source_path
     file_name=`basename "$source_path"`
@@ -12,7 +21,7 @@ for source_path in $@; do
     # echo exercise: $exercise
 
     echo "Submitting $file_name to dredd's $exercise ..." 
-    curl -F source=@$source_path https://dredd.h4x0r.space/code/cse-30872-su24/$exercise
+    curl -F source=@$source_path $DREDD_CODE_URL/$exercise
     echo
     echo
 done
