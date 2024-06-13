@@ -45,7 +45,7 @@ def binary_search_modif(l: list, target, modif: callable = None) -> int:
 
 
 def main():
-    for n in map(int, sys.stdin):
+    for n in (int(i) for i in sys.stdin):
         print("Yes" if is_perfect_square(n) else "No")
 
 
