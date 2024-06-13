@@ -22,9 +22,9 @@ Each folder corresponds to a different exercise and contains:
 
 ### Dredd Testing
 
-To test solutions using [dredd](https://dredd.h4x0r.space/), simply run: `./dredd_test.sh source_file1  source_file2 ...`
+To test solutions using [dredd](https://dredd.h4x0r.space/), simply run: `./dredd_test.sh source_file1 source_file2 ...`
 
-> To test a solution in debugging mode, run: `DEBUG=1 ./dredd_test.sh source_file1  source_file2 ...`
+> To test a solution in debugging mode, run: `DEBUG=1 ./dredd_test.sh source_file1 source_file2 ...`
 
 `dredd_test.sh` automatically detects the corresponding exercise to the solution based on the parent directory of the source file and submits the solution to dredd; thus, all source files should be placed accordingly.
 
