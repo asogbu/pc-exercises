@@ -19,5 +19,6 @@ int main(int argc, char *argv[]) {
         printf("%d\n", sum);
     }
 
+    free(line);
     return 0;
 }
