@@ -2,53 +2,45 @@
 
 # Exercise 08-B: Squirrel Hunting
 
-# Notes:
-#
-#   1. Each S(r, c) contains the optimal solution for that square.
-#
-#   2. Final solution is in the bottom right corner: S(n, n).
-#
-#   3. Building the table does not reveal what the path is, just what the
-#   maximum squirrel population is.
 
 import sys
 
+
 # Type Aliases
+
 
 Grid = list[list[int]]
 
+
 # Functions
 
+
 def read_grid(n: int) -> Grid:
-    grid = [[0 for _ in range(n + 1)]]      # Pad grid
+    # Read and pad grid
+    grid = [[0] * (n + 1)]
     for _ in range(n):
-        grid.append([0] + list(map(int, sys.stdin.readline().split())))
+        grid.append([0] + [int(w) for w in sys.stdin.readline().split()])
     return grid
 
-def hunt_squirrels(grid: Grid, n: int) -> Grid:
-    # TODO: 1. Initialize table
-    pass
 
-    # TODO: 2. Table[row][col] = Grid[row][col] + max(from_left, from_above)
-    #
-    #   S(r, c) = Max(S(r, c - 1), S(r - 1, c)) + G(r, c)
-    #
-    pass
+def hunt_squirrels(grid: Grid, n: int) -> int:
+    table = [[0] * (n + 1) for _ in range(n + 1)]
 
-    # TODO: 3. Use table result
-    pass
+    for r in range(1, n + 1):
+        for c in range(1, n + 1):
+            table[r][c] = grid[r][c] + max(table[r - 1][c], table[r][c - 1])
+
+    return table[n][n]
+
 
 # Main execution
 
-def main() -> None:
-    while True:
-        try:
-            n = int(sys.stdin.readline())
-        except ValueError:
-            break
 
+def main() -> None:
+    for n in (int(w) for w in sys.stdin):
         grid = read_grid(n)
         print(hunt_squirrels(grid, n))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
