@@ -19,8 +19,20 @@ class Node:
 
 AlgorithmTree = Node(
     "A",
-    Node("L", Node("O", Node("H"), Node("M")), Node("R")),
-    Node("G", Node("I"), Node("T")),
+    Node(
+        "L",
+        Node(
+            "O",
+            Node("H"),
+            Node("M"),
+        ),
+        Node("R"),
+    ),
+    Node(
+        "G",
+        Node("I"),
+        Node("T"),
+    ),
 )
 
 # Traversal: BFS (Iterative)
