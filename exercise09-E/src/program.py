@@ -34,15 +34,21 @@ def bst_insert(node: Optional[Node], value: int) -> Optional[Node]:
     return node
 
 
-def is_balanced(root: Optional[Node], height: int = 0) -> tuple[bool, int]:
+def is_balanced(root: Optional[Node]) -> tuple[bool, int]:
     """Use divide and conquer to determine if a binary tree is balanced"""
     # Base Case: Invalid node, so return current height and that it is balanced
+    if not root:
+        return True, 0
 
     # Divide and Conquer: Recursively compute height of left and right
     # sub-trees and if they are balanced
+    left_balanced, left_height = is_balanced(root.left)
+    right_balanced, right_height = is_balanced(root.right)
 
     # Combine: compute height and whether or not the overall tree is balanced
-    return False, 0
+    balanced = left_balanced and right_balanced and abs(left_height - right_height) <= 1
+    height = max(left_height, right_height) + 1
+    return (balanced, height)
 
 
 # Main Execution
