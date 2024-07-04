@@ -12,24 +12,24 @@ import sys
 @dataclass
 class Node:
     value: int
-    left: Optional["Node"]
-    right: Optional["Node"]
+    left: Optional["Node"] = None
+    right: Optional["Node"] = None
 
 
 # Functions
 
 
-def bst_insert(node: Optional[Node], value: int) -> Optional[Node]:
+def bst_insert(value: int, node: Optional[Node] = None) -> Optional[Node]:
     # Base: node doesn't exist, so return a new one
     if not node:
-        return Node(value, None, None)
+        return Node(value)
 
     # Recursive: insert left if value is less than or equal to current Node,
     # otherwise insert right
     if value <= node.value:
-        node.left = bst_insert(node.left, value)
+        node.left = bst_insert(value, node.left)
     else:
-        node.right = bst_insert(node.right, value)
+        node.right = bst_insert(value, node.right)
 
     return node
 
@@ -48,7 +48,8 @@ def is_balanced(root: Optional[Node]) -> tuple[bool, int]:
     # Combine: compute height and whether or not the overall tree is balanced
     balanced = left_balanced and right_balanced and abs(left_height - right_height) <= 1
     height = max(left_height, right_height) + 1
-    return (balanced, height)
+
+    return balanced, height
 
 
 # Main Execution
@@ -58,11 +59,11 @@ def main() -> None:
     for line in sys.stdin:
         # Construct BST
         root = None
-        for value in map(int, line.split()):
-            root = bst_insert(root, value)
+        for value in (int(w) for w in line.split()):
+            root = bst_insert(value, root)
 
         # Determine if BST is balanced
-        balanced, height = is_balanced(root)
+        balanced, _ = is_balanced(root)
         print("Balanced" if balanced else "Unbalanced")
 
 
