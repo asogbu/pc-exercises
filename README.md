@@ -2,7 +2,7 @@
 
 ### [Programming Challenges](https://www3.nd.edu/~pbui/teaching/cse.30872.su24/) (Summer Session 2024)
 
-This repository contains a collection of in-class exercises for the Programming Challenges course. During class, students collaborate in groups of 4-5 to design and implement solutions in Python or C++ within a limited time. Some exercises, while not covered in class discussions, are also included for additional practice.
+This repository contains a collection of in-class exercises for the Programming Challenges course. During class, students collaborate in groups of 4-5 to design and implement solutions in Python or C++ within a limited time. See the original instructor's repository [here](https://github.com/nd-cse-30872-su24/cse-30872-su24-examples/).
 
 Each folder corresponds to a different exercise and contains:
 
@@ -22,7 +22,7 @@ Each folder corresponds to a different exercise and contains:
 
 ### Dredd Testing
 
-To test solutions using [dredd](https://dredd.h4x0r.space/), simply run: `./dredd_test.sh source_file1 source_file2 ...`
+To test solutions using [dredd](https://dredd.h4x0r.space/) (the instructor's testing server), simply run: `./dredd_test.sh source_file1 source_file2 ...`
 
 > To test a solution in debugging mode, run: `DEBUG=1 ./dredd_test.sh source_file1 source_file2 ...`
 
