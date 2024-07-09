@@ -11,13 +11,14 @@ Graph = dict[int, set]
 # Functions
 
 
-def read_graph(undirected: Optional[bool] = False) -> Graph:
+def read_graph(undirected: bool = False) -> Graph:
     """Read graph from standard input"""
     graph: Graph = defaultdict(set)
     for src, dst in (line.split() for line in sys.stdin):
-        graph[int(src)].add(int(dst))
+        src, dst = int(src), int(dst)
+        graph[src].add(dst)
         if undirected:
-            graph[int(dst)].add(int(src))
+            graph[dst].add(src)
 
     return graph
 
