@@ -2,79 +2,84 @@
 
 # Exercise 10-B: Bicolorable
 
-from typing import Iterable
-
-import collections
 import sys
+from typing import Optional, Any
+from collections import defaultdict
 
 # Constants
 
-BLUE = 0
-RED = 1
+BLUE = False
+RED = True
 
 # Type Aliases
 
-Graph = dict[int, set[int]]
+Graph = dict[Any, set]
 
-# Read Graph
+# Functions
 
 
-def read_graph() -> Graph:
-    """Construct adjacency set"""
-    try:
-        n, m = map(int, sys.stdin.readline().split())
-    except ValueError:
-        return {}
+def read_graph(undirected: bool = False) -> Graph:
+    """Read graph from standard input"""
+    _, m = [int(w) for w in sys.stdin.readline().split()]
+    graph: Graph = defaultdict(set)
 
-    graph: Graph = {v: set() for v in range(n)}
-
-    for _ in range(m):
-        source, target = map(int, sys.stdin.readline().split())
-        graph[source].add(target)
-        graph[target].add(source)
+    for line in (sys.stdin.readline() for _ in range(m)):
+        src, dst = [int(w) for w in line.split()]
+        graph[src].add(dst)
+        if undirected:
+            graph[dst].add(src)
 
     return graph
 
 
-# Determine if Bicolorable
-
-
-def is_bicolorable(g: Graph) -> bool:
+def is_bicolorable(graph: Graph) -> bool:
     """Determines if graphis bicolorable by walking it recursively."""
-    return walk1(g, list(g.keys())[0], BLUE, {})
+    return walk2(graph, next(iter(graph.keys())))
 
 
-def walk1(g: Graph, n: int, color: int, visited: dict[int, int]) -> bool:
+def walk1(
+    graph: Graph,
+    origin,
+    color: bool = BLUE,
+    visited: Optional[dict[Any, bool]] = None,
+) -> bool:
     """Recursively walk graph and verifying that the node has the appropriate
     color."""
 
-    # We have already visited this node, so verify we still have the same
-    # color.
-    pass
+    if visited is None:
+        visited = {}
 
-    # We have not visited this node yet, so store its color.
-    pass
+    if origin in visited:
+        return color == visited[origin]
 
-    # Visit each neighbor recursively with the alternate color and check that
-    # they are colorable.
-    pass
+    visited[origin] = color
+
+    for neighbor in graph[origin]:
+        if not walk1(graph, neighbor, not color, visited):
+            return False
+
+    return True
 
 
-def walk2(g: Graph, n: int, color: int, visited: dict[int, int]) -> bool:
+def walk2(graph: Graph, origin) -> bool:
     """Iteratively walk graph and verifying that the node has the appropriate
     color."""
-    # Establish frontier with initial node and color
-    pass
+    visited = {}
 
-    # While there are still nodes in the frontier...
-    pass
-    # Pop one node from frontier
+    stack = [(origin, RED)]
 
-    # Check if it has been visited
+    while stack:
+        node, color = stack.pop()
 
-    # Mark that it has been visited
+        if node in visited:
+            if visited[node] != color:
+                return False
+        else:
+            visited[node] = color
+            next_color = not color
+            stack.extend((neighbor, next_color) for neighbor in graph[node])
 
-    # Add neighbors to frontier
+    return True
 
 
 # Main execution
