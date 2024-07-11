@@ -6,13 +6,12 @@
 from collections import defaultdict
 import heapq
 import sys
-from typing import Any
 
 
 # Type Aliases
 
-
-Graph = dict[Any, dict[Any, int]]
+Vertex = str
+Graph = dict[Vertex, dict[Vertex, int]]
 
 
 # Functions
