@@ -2,54 +2,66 @@
 
 # Exercise: 10-D: MST
 
-import collections
+
+from collections import defaultdict
 import heapq
 import sys
+from typing import Any, Iterator
+
 
 # Type Aliases
 
-Graph = dict[str, dict[str, int]]
-Visited = dict[str, str]
-Frontier = list[tuple[int, str, str]]
 
-# Build Graph
+Graph = dict[Any, dict[Any, int]]
+Edge = tuple[Any, Any, int]
 
 
-def read_graph() -> Graph:
-    """Read in undirected graph"""
-    g: Graph = collections.defaultdict(dict)
-    for line in sys.stdin:
-        source, target, weight = line.split()
-        g[source][target] = int(weight)
-        g[target][source] = int(weight)
-    return g
+# Functions
 
 
-# Compute MST
+def read_graph(undirected=False) -> Graph:
+    graph: Graph = defaultdict(dict)
+
+    for source, target, weight in (line.split() for line in sys.stdin):
+        weight = int(weight)
+        graph[source][target] = weight
+
+        if undirected:
+            graph[target][source] = weight
+
+    return graph
 
 
-def compute_mst(g: Graph) -> Visited:
-    frontier: Frontier = []
-    visited: Visited = {}
-    start: str = list(g.keys())[0]
+def compute_mst(graph: Graph) -> Iterator[Edge]:
+    visited = set()
+    start = next(iter(graph.keys()))
+    frontier = [(0, None, start)]
 
-    # TODO
+    while frontier:
+        weight, source, target = heapq.heappop(frontier)
 
-    return visited
+        if target in visited:
+            continue
+        visited.add(target)
+
+        if source is not None:
+            yield source, target, weight
+
+        for neighbor, weight in graph[target].items():
+            heapq.heappush(frontier, (weight, target, neighbor))
 
 
 # Main Execution
 
 
 def main():
-    # Read Graph
-    g = read_graph()
+    graph = read_graph(undirected=True)
+    mst = list(compute_mst(graph))
+    mst.sort()
 
-    # Compute MST
-    m = compute_mst(g)
-
-    # Print Weight and Edges
-    # TODO
+    print(sum(weight for _, _, weight in mst))
+    for source, target, _ in mst:
+        print(source, target)
 
 
 if __name__ == "__main__":
