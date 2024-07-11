@@ -48,13 +48,13 @@ def compute_sssp(graph: Graph, start: Vertex) -> Visited:
     return visited
 
 
-def get_path(sssp_prev_vertex: Visited, source: Vertex, target: Vertex) -> list[Vertex]:
+def get_path(prev_vertex: Visited, source: Vertex, target: Vertex) -> deque[Vertex]:
     path = deque()
     curr = target
 
     while curr != source:
         path.appendleft(curr)
-        curr = sssp_prev_vertex[curr]
+        curr = prev_vertex[curr]
     path.appendleft(source)
 
     return path
@@ -67,13 +67,11 @@ def main() -> None:
     graph = read_graph()
 
     start = "A"
-    sssp_prev_vertex = compute_sssp(graph, start)
+    sssp = compute_sssp(graph, start)
 
     for vertex in graph.keys():
         if vertex != start:
-            print(
-                f"{start} -> {vertex} = {' '.join(get_path(sssp_prev_vertex, start, vertex))}"
-            )
+            print(f"{start} -> {vertex} = {' '.join(get_path(sssp, start, vertex))}")
 
 
 if __name__ == "__main__":
