@@ -18,7 +18,7 @@ Graph = dict[Vertex, dict[Vertex, int]]
 
 
 def read_graph(undirected=False) -> Graph:
-    graph: Graph = defaultdict(dict)
+    graph = defaultdict(dict)
 
     for source, target, weight in (line.split() for line in sys.stdin):
         weight = int(weight)
