@@ -41,17 +41,15 @@ def compute_mst(graph: Graph) -> tuple[list[tuple[int, int]], int]:
 
         while frontier:
             weight, source, target = heapq.heappop(frontier)
+            if target not in visited:
+                visited.add(target)
 
-            if target in visited:
-                continue
-            visited.add(target)
+                if source is not None:
+                    mst.append((source, target))
+                    sum_ += weight
 
-            if source is not None:
-                mst.append((source, target))
-                sum_ += weight
-
-            for neighbor, weight in graph[target].items():
-                heapq.heappush(frontier, (weight, target, neighbor))
+                for neighbor, weight in graph[target].items():
+                    heapq.heappush(frontier, (weight, target, neighbor))
 
     return mst, sum_
 
