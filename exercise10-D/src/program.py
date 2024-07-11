@@ -6,7 +6,8 @@
 from collections import defaultdict
 import heapq
 import sys
-from typing import Any, Iterator
+from typing import Any
+from collections.abc import Iterator
 
 
 # Type Aliases
