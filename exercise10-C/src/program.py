@@ -2,60 +2,78 @@
 
 # Exercise 10-C: SSSP
 
-import collections
+from collections import defaultdict, deque
 import heapq
 import sys
 
 # Type Aliases
 
-Graph = dict[str, dict[str, int]]
-Visited = dict[str, str]
-Frontier = list[tuple[int, str, str]]
+Vertex = str
+Graph = dict[Vertex, dict[Vertex, int]]
+Visited = dict[Vertex, Vertex]
 
 # Build Graph
 
 
-def read_graph() -> Graph:
-    """Read in undirected graph"""
-    g: Graph = collections.defaultdict(dict)
-    # TODO
-    return g
+def read_graph(undirected=False) -> Graph:
+    graph = defaultdict(dict)
+
+    for source, target, weight in (line.split() for line in sys.stdin):
+        weight = int(weight)
+        graph[source][target] = weight
+
+        if undirected:
+            graph[target][source] = weight
+
+    return graph
 
 
 # Compute SSSP
 
 
-def compute_sssp(g: Graph, start: str) -> Visited:
-    """Use Dijkstra's Algorithm to compute the single-source shortest path"""
-    frontier: Frontier = []
+def compute_sssp(graph: Graph, start: Vertex) -> Visited:
+    """Compute the single-source shortest path"""
+    frontier = [(0, None, start)]
     visited: Visited = {}
 
-    # TODO
+    while frontier:
+        distance, source, target = heapq.heappop(frontier)
+
+        if target not in visited:
+            visited[target] = source
+
+            for neighbor, weight in graph[target].items():
+                heapq.heappush(frontier, (distance + weight, target, neighbor))
+
     return visited
 
 
-def reconstruct_path(visited: Visited, source: str, target: str) -> list[str]:
-    """Reconstruct path from source to target"""
-    path = []
+def get_path(sssp_prev_vertex: Visited, source: Vertex, target: Vertex) -> list[Vertex]:
+    path = deque()
     curr = target
-    # TODO
-    return path[::-1]
+
+    while curr != source:
+        path.appendleft(curr)
+        curr = sssp_prev_vertex[curr]
+    path.appendleft(source)
+
+    return path
 
 
 # Main Execution
 
 
 def main() -> None:
-    # Read Graph
-    g = read_graph()
+    graph = read_graph()
 
-    # Compute SSSP
-    s = list(g.keys())[0]
-    v = compute_sssp(g, s)
+    start = "A"
+    sssp_prev_vertex = compute_sssp(graph, start)
 
-    # Reconstruct Path
-    for t in list(g.keys())[1:]:
-        print("{} -> {} = {}".format(s, t, " ".join(reconstruct_path(v, s, t))))
+    for vertex in graph.keys():
+        if vertex != start:
+            print(
+                f"{start} -> {vertex} = {' '.join(get_path(sssp_prev_vertex, start, vertex))}"
+            )
 
 
 if __name__ == "__main__":
