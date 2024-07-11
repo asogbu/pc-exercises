@@ -4,7 +4,6 @@
 
 
 from collections import defaultdict
-from collections.abc import Iterator
 import heapq
 import sys
 from typing import Any
@@ -14,7 +13,6 @@ from typing import Any
 
 
 Graph = dict[Any, dict[Any, int]]
-Edge = tuple[Any, Any, int]
 
 
 # Functions
@@ -33,24 +31,30 @@ def read_graph(undirected=False) -> Graph:
     return graph
 
 
-def compute_mst(graph: Graph) -> Iterator[Edge]:
-    visited = set()
-    if (start := next(iter(graph.keys()), None)) is None:
-        return
-    frontier = [(0, None, start)]
+def compute_mst(graph: Graph) -> tuple[list[tuple[int, int]], int]:
+    mst = []
+    sum_ = 0
+    start = next(iter(graph.keys()), None)
 
-    while frontier:
-        weight, source, target = heapq.heappop(frontier)
+    if start is not None:
+        visited = set()
+        frontier = [(0, None, start)]
 
-        if target in visited:
-            continue
-        visited.add(target)
+        while frontier:
+            weight, source, target = heapq.heappop(frontier)
 
-        if source is not None:
-            yield source, target, weight
+            if target in visited:
+                continue
+            visited.add(target)
 
-        for neighbor, weight in graph[target].items():
-            heapq.heappush(frontier, (weight, target, neighbor))
+            if source is not None:
+                mst.append((source, target))
+                sum_ += weight
+
+            for neighbor, weight in graph[target].items():
+                heapq.heappush(frontier, (weight, target, neighbor))
+
+    return mst, sum_
 
 
 # Main Execution
@@ -58,11 +62,11 @@ def compute_mst(graph: Graph) -> Iterator[Edge]:
 
 def main():
     graph = read_graph(undirected=True)
-    mst = list(compute_mst(graph))
-    mst.sort()
+    mst, sum_ = compute_mst(graph)
 
-    print(sum(weight for _, _, weight in mst))
-    for source, target, _ in mst:
+    print(sum_)
+    mst.sort()
+    for source, target in mst:
         print(source, target)
 
 
