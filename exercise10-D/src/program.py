@@ -4,10 +4,10 @@
 
 
 from collections import defaultdict
+from collections.abc import Iterator
 import heapq
 import sys
 from typing import Any
-from collections.abc import Iterator
 
 
 # Type Aliases
@@ -35,7 +35,8 @@ def read_graph(undirected=False) -> Graph:
 
 def compute_mst(graph: Graph) -> Iterator[Edge]:
     visited = set()
-    start = next(iter(graph.keys()))
+    if (start := next(iter(graph.keys()), None)) is None:
+        return
     frontier = [(0, None, start)]
 
     while frontier:
