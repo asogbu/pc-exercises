@@ -4,6 +4,8 @@ You are to decide whether a given arbitrary connected graph can be bicolored. Th
 
 You can assume the graph is undirected and strongly connected. You will be given a series of graphs specified by `n` (number of nodes) and `m` (number of edges), followed by `m` pairs of edges.
 
+Input is terminated by `0 0`.
+
 <style>
 td {
   vertical-align: top;
@@ -22,6 +24,7 @@ td {
             <td>3 2<br>
                 0 1<br>
                 1 2<br>
+                0 0
             </td>
             <td>BICOLORABLE</td>
         </tr>

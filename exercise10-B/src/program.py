@@ -3,28 +3,33 @@
 # Exercise 10-B: Bicolorable
 
 import sys
-from typing import Optional, Any
+from typing import Optional
 from collections import defaultdict
-
-# Constants
-
-BLUE = False
-RED = True
 
 # Type Aliases
 
-Graph = dict[Any, set]
+
+Vertex = str
+Graph = dict[Vertex, set[Vertex]]
+Color = bool
+
+
+# Constants
+
+
+BLUE: Color = False
+RED: Color = True
+
 
 # Functions
 
 
 def read_graph(undirected: bool = False) -> Graph:
-    """Read graph from standard input"""
-    _, m = [int(w) for w in sys.stdin.readline().split()]
-    graph: Graph = defaultdict(set)
+    _, m = (int(w) for w in sys.stdin.readline().split())
+    graph = defaultdict(set)
 
     for line in (sys.stdin.readline() for _ in range(m)):
-        src, dst = [int(w) for w in line.split()]
+        src, dst = line.split()
         graph[src].add(dst)
         if undirected:
             graph[dst].add(src)
@@ -33,15 +38,14 @@ def read_graph(undirected: bool = False) -> Graph:
 
 
 def is_bicolorable(graph: Graph) -> bool:
-    """Determines if graphis bicolorable by walking it recursively."""
     return walk2(graph, next(iter(graph.keys())))
 
 
 def walk1(
     graph: Graph,
-    origin,
-    color: bool = BLUE,
-    visited: Optional[dict[Any, bool]] = None,
+    origin: Vertex,
+    color: Color = BLUE,
+    visited: Optional[dict[Vertex, Color]] = None,
 ) -> bool:
     """Recursively walk graph and verifying that the node has the appropriate
     color."""
@@ -61,7 +65,7 @@ def walk1(
     return True
 
 
-def walk2(graph: Graph, origin) -> bool:
+def walk2(graph: Graph, origin: Vertex) -> bool:
     """Iteratively walk graph and verifying that the node has the appropriate
     color."""
     visited = {}
@@ -87,10 +91,7 @@ def walk2(graph: Graph, origin) -> bool:
 
 def main() -> None:
     while graph := read_graph():
-        if is_bicolorable(graph):
-            print("BICOLORABLE")
-        else:
-            print("NOT BICOLORABLE")
+        print("BICOLORABLE" if is_bicolorable(graph) else "NOT BICOLORABLE")
 
 
 if __name__ == "__main__":
