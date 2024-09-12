@@ -5,7 +5,9 @@
 #include <string>
 
 int main(int argc, char *argv[]) {
-    for (std::string line; std::getline(std::cin, line);) {
+    std::string line;
+
+    while (std::getline(std::cin, line)) {
         std::stringstream ss(line);
 
         int sum = 0;
