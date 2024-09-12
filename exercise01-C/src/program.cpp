@@ -1,25 +1,28 @@
 // Exercise 01-C: Count Duplicates
 
-#include <algorithm>
 #include <iostream>
+#include <sstream>
+#include <string>
 #include <unordered_set>
-#include <vector>
-
-// Functions
-
-int count_duplicates(std::vector<int> &numbers) {
-    // TODO
-    return 0;
-}
-
-// Main Execution
 
 int main(int argc, char *argv[]) {
-    // TODO: Read numbers
+    int duplicates = 0;
+    std::unordered_set<int> seen_numbers;
 
-    // TODO: Count duplicates
+    std::string line;
+    while (std::getline(std::cin, line)) {
+        std::stringstream ss(line);
+        int n;
+        ss >> n;
 
-    // TODO: Display total
+        if (seen_numbers.find(n) != seen_numbers.end()) {
+            duplicates++;
+        } else {
+            seen_numbers.insert(n);
+        }
+    }
+
+    std::cout << duplicates << '\n';
 
     return 0;
 }

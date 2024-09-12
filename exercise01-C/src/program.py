@@ -4,24 +4,18 @@
 
 import sys
 
-# Functions
-
-
-def count_duplicates(numbers: list[int]) -> int:
-    # TODO
-    return 0
-
-
-# Main Execution
-
 
 def main():
-    # TODO: Read numbers
+    duplicates = 0
+    seen_numbers = set()
 
-    # TODO: Count duplicates
+    for line in sys.stdin:
+        if (n := int(line)) in seen_numbers:
+            duplicates += 1
+        else:
+            seen_numbers.add(n)
 
-    # TODO: Display total
-    pass
+    print(duplicates)
 
 
 if __name__ == "__main__":
