@@ -1,4 +1,4 @@
-// Exercise 01-C: Count Duplicates
+// Exercise 01-D: Count Duplicates
 
 #include <limits.h>
 
@@ -7,9 +7,30 @@
 #include <sstream>
 #include <string>
 
+// Prototypes
+
+int FindMatrixMaxRow(std::istream& stream, int n);
+
+// Main Execution
+
+int main(int argc, char* argv[]) {
+    std::string line;
+    while (std::getline(std::cin, line)) {
+        std::stringstream ss(line);
+        int n;
+        ss >> n;
+
+        if (n == 0)
+            break;
+        std::cout << FindMatrixMaxRow(std::cin, n) << '\n';
+    }
+
+    return 0;
+}
+
 // Functions
 
-int find_matrix_max_row(std::istream& stream, int n) {
+int FindMatrixMaxRow(std::istream& stream, int n) {
     int max_sum = INT_MIN;
     int max_row = 0;
 
@@ -31,23 +52,6 @@ int find_matrix_max_row(std::istream& stream, int n) {
     }
 
     return max_row;
-}
-
-// Main Execution
-
-int main(int argc, char* argv[]) {
-    std::string line;
-    while (std::getline(std::cin, line)) {
-        std::stringstream ss(line);
-        int n;
-        ss >> n;
-
-        if (n == 0)
-            break;
-        std::cout << find_matrix_max_row(std::cin, n) << '\n';
-    }
-
-    return 0;
 }
 
 // vim: set sts=4 sw=4 ts=8 ft=cpp:

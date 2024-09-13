@@ -4,23 +4,30 @@
 #include <sstream>
 #include <string>
 
-int sum_series(int n);
+// Prototypes
+
+int SumSeries(int n);
+
+// Main Execution
 
 int main(int argc, char *argv[]) {
-    for (std::string line; std::getline(std::cin, line);) {
+    std::string line;
+
+    while (std::getline(std::cin, line)) {
         std::stringstream ss(line);
         int n;
         ss >> n;
-        if (n == 0)
-            break;
+        if (n == 0) break;
 
-        std::cout << sum_series(n) << '\n';
+        std::cout << SumSeries(n) << '\n';
     }
 
     return 0;
 }
 
-int sum_series(int n) {
+// Functions
+
+int SumSeries(int n) {
     int sum = 0;
 
     for (int i = 0; i < n; i++) {
@@ -34,3 +41,5 @@ int sum_series(int n) {
 
     return sum;
 }
+
+// vim: set sts=4 sw=4 ts=8 ft=cpp:

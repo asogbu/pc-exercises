@@ -12,11 +12,12 @@ int main(int argc, char *argv[]) {
 
         int sum = 0;
         int n;
-        while (ss >> n)
-            sum += n;
+        while (ss >> n) sum += n;
 
         std::cout << sum << '\n';
     }
 
     return 0;
 }
+
+// vim: set sts=4 sw=4 ts=8 ft=cpp:
