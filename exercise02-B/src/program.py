@@ -4,19 +4,16 @@
 
 import sys
 
-# Functions
+# Constants
 
-# LEFT_PBB  = ('(', '[', '{')
-# RIGHT_PBB = (')', ']', '}')
 MATCHING = {")": "(", "]": "[", "}": "{"}
+
+# Functions
 
 
 def is_pbbmatched(s: str) -> bool:
-    # TODO: Process string s using a stack to determine if the symbols are balanced
     stack = []
-    # print(')' in MATCHING.keys())
     for symbol in s:
-        # print(symbol)
         if symbol in MATCHING.keys():
             if len(stack) == 0:
                 return False
@@ -35,7 +32,7 @@ def is_pbbmatched(s: str) -> bool:
 
 def main():
     for line in sys.stdin:
-        line = line.rstrip()
+        line = line.strip()
         result = "Yes" if is_pbbmatched(line) else "No"
         print("{:>10}: {}".format(line, result))
 
