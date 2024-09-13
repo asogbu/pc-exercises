@@ -11,6 +11,23 @@
 const std::unordered_map<char, char> kMatching = {
     {')', '('}, {']', '['}, {'}', '{'}};
 
+// Prototypes
+
+bool IsPBBMatched(const std::string& s);
+
+// Main execution
+
+int main(int argc, char* argv[]) {
+    std::string line;
+
+    while (std::getline(std::cin, line)) {
+        std::cout << std::setw(10) << line << ": "
+                  << (IsPBBMatched(line) ? "Yes" : "No") << '\n';
+    }
+
+    return 0;
+}
+
 // Functions
 
 bool IsPBBMatched(const std::string& s) {
@@ -29,19 +46,6 @@ bool IsPBBMatched(const std::string& s) {
     }
 
     return open_pbb.empty();
-}
-
-// Main execution
-
-int main(int argc, char* argv[]) {
-    std::string line;
-
-    while (std::getline(std::cin, line)) {
-        std::cout << std::setw(10) << line << ": "
-                  << (IsPBBMatched(line) ? "Yes" : "No") << '\n';
-    }
-
-    return 0;
 }
 
 // vim: set sts=4 sw=4 ts=8 ft=cpp:
