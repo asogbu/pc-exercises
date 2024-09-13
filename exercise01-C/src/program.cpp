@@ -10,12 +10,8 @@ int main(int argc, char *argv[]) {
 
     std::string line;
     while (std::getline(std::cin, line)) {
-        int n = std::stoi(line);
-
-        if (seen_numbers.find(n) != seen_numbers.end()) {
+        if (!seen_numbers.insert(std::stoi(line)).second) {
             duplicates++;
-        } else {
-            seen_numbers.insert(n);
         }
     }
 
