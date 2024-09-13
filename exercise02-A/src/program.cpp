@@ -1,4 +1,4 @@
-// Exercise 04-A: Anagrams
+// Exercise 02-A: Anagrams
 
 #include <array>
 #include <cctype>
