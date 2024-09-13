@@ -4,24 +4,22 @@
 
 #include <iostream>
 #include <istream>
-#include <sstream>
 #include <string>
 
 // Prototypes
 
 int FindMatrixMaxRow(std::istream& stream, int n);
+int GetStringSum(std::string s);
+void LTrim(std::string& s);
 
 // Main Execution
 
 int main(int argc, char* argv[]) {
     std::string line;
     while (std::getline(std::cin, line)) {
-        std::stringstream ss(line);
-        int n;
-        ss >> n;
+        int n = std::stoi(line);
+        if (n == 0) break;
 
-        if (n == 0)
-            break;
         std::cout << FindMatrixMaxRow(std::cin, n) << '\n';
     }
 
@@ -37,13 +35,7 @@ int FindMatrixMaxRow(std::istream& stream, int n) {
     std::string line;
     for (int row = 1; row <= n; row++) {
         std::getline(stream, line);
-        std::stringstream ss(line);
-
-        int row_sum = 0;
-        int i;
-        while (ss >> i) {
-            row_sum += i;
-        }
+        int row_sum = GetStringSum(line);
 
         if (row_sum > max_sum) {
             max_sum = row_sum;
@@ -52,6 +44,25 @@ int FindMatrixMaxRow(std::istream& stream, int n) {
     }
 
     return max_row;
+}
+
+int GetStringSum(std::string s) {
+    int sum = 0;
+
+    while (s.length() > 0) {
+        size_t pos;
+        sum += std::stoi(s, &pos);
+        s.erase(0, pos);
+        LTrim(s);
+    }
+
+    return sum;
+}
+
+void LTrim(std::string& s) {
+    size_t pos = 0;
+    while (pos < s.size() && std::isspace(s[pos])) pos++;
+    s.erase(0, pos);
 }
 
 // vim: set sts=4 sw=4 ts=8 ft=cpp:

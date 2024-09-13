@@ -1,7 +1,6 @@
 // Exercise 01-C: Count Duplicates
 
 #include <iostream>
-#include <sstream>
 #include <string>
 #include <unordered_set>
 
@@ -11,9 +10,7 @@ int main(int argc, char *argv[]) {
 
     std::string line;
     while (std::getline(std::cin, line)) {
-        std::stringstream ss(line);
-        int n;
-        ss >> n;
+        int n = std::stoi(line);
 
         if (seen_numbers.find(n) != seen_numbers.end()) {
             duplicates++;

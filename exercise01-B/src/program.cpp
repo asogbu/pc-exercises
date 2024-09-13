@@ -1,25 +1,23 @@
 // Exercise 01-B: Fixed Totals
 
 #include <iostream>
-#include <sstream>
+#include <istream>
 #include <string>
 
 // Prototypes
 
-int SumSeries(int n);
+int SumSeries(std::istream& stream, int n);
 
 // Main Execution
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     std::string line;
 
     while (std::getline(std::cin, line)) {
-        std::stringstream ss(line);
-        int n;
-        ss >> n;
+        int n = std::stoi(line);
         if (n == 0) break;
 
-        std::cout << SumSeries(n) << '\n';
+        std::cout << SumSeries(std::cin, n) << '\n';
     }
 
     return 0;
@@ -27,16 +25,13 @@ int main(int argc, char *argv[]) {
 
 // Functions
 
-int SumSeries(int n) {
+int SumSeries(std::istream& stream, int n) {
     int sum = 0;
 
     for (int i = 0; i < n; i++) {
         std::string line;
-        std::getline(std::cin, line);
-        std::stringstream ss(line);
-        int j;
-        ss >> j;
-        sum += j;
+        std::getline(stream, line);
+        sum += std::stoi(line);
     }
 
     return sum;
