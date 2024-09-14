@@ -6,7 +6,7 @@
 
 // Prototypes
 
-int SumSeries(std::istream& stream, int n);
+int SumSeries(std::istream& input, int n);
 
 // Main Execution
 
@@ -25,12 +25,12 @@ int main(int argc, char* argv[]) {
 
 // Functions
 
-int SumSeries(std::istream& stream, int n) {
+int SumSeries(std::istream& input, int n) {
     int sum = 0;
 
     for (int i = 0; i < n; i++) {
         std::string line;
-        std::getline(stream, line);
+        std::getline(input, line);
         sum += std::stoi(line);
     }
 

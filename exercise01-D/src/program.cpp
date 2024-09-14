@@ -8,7 +8,7 @@
 
 // Prototypes
 
-int FindMatrixMaxRow(std::istream& stream, int n);
+int FindMatrixMaxRow(std::istream& input, int n);
 int GetStringSum(std::string s);
 void LTrim(std::string& s);
 
@@ -28,13 +28,13 @@ int main(int argc, char* argv[]) {
 
 // Functions
 
-int FindMatrixMaxRow(std::istream& stream, int n) {
+int FindMatrixMaxRow(std::istream& input, int n) {
     int max_sum = INT_MIN;
     int max_row = 0;
 
     std::string line;
     for (int row = 1; row <= n; row++) {
-        std::getline(stream, line);
+        std::getline(input, line);
         int row_sum = GetStringSum(line);
 
         if (row_sum > max_sum) {
