@@ -15,14 +15,14 @@ def is_perfect_square(n: int) -> bool:
 
 def binary_search_modif(l: list, target, modif: callable = None) -> int:
     """
-    In a sorted list, performs a binary search looking for an element such that
+    Performs a binary search in a sorted list looking for an element such that
     modif(element) == target.
 
     If no modifying function is passed, modif is the identity function effectively.
 
     Returns:
-        int: If target is found, the index of some occurrence of target.
-             Otherwise, -1 is returned.
+        int: If the required element is found, the index of one of its occurrences.
+             Otherwise, -1.
     """
     left = 0
     right = len(l) - 1
@@ -32,7 +32,7 @@ def binary_search_modif(l: list, target, modif: callable = None) -> int:
         midpoint = modif(l[middle]) if modif else l[middle]
         if target == midpoint:
             return middle
-        elif target < midpoint:
+        if target < midpoint:
             right = middle - 1
         else:
             left = middle + 1
