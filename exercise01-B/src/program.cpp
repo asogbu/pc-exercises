@@ -11,14 +11,9 @@ int SumSeries(std::istream& input, int n);
 // Main Execution
 
 int main(int argc, char* argv[]) {
-    std::string line;
-
-    while (std::getline(std::cin, line)) {
-        int n = std::stoi(line);
-        if (n == 0) break;
-
+    int n;
+    while (std::cin >> n && n != 0)
         std::cout << SumSeries(std::cin, n) << '\n';
-    }
 
     return 0;
 }
@@ -29,9 +24,9 @@ int SumSeries(std::istream& input, int n) {
     int sum = 0;
 
     for (int i = 0; i < n; i++) {
-        std::string line;
-        std::getline(input, line);
-        sum += std::stoi(line);
+        int j;
+        input >> j;
+        sum += j;
     }
 
     return sum;
