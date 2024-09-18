@@ -6,7 +6,7 @@
 
 // Prototypes
 
-bool IsPerfectSquare(const long& n);
+bool IsPerfectSquare(long n);
 
 // Performs a binary search in the range [start, end] looking for an element such
 // that modif(element) == target.
@@ -15,10 +15,8 @@ bool IsPerfectSquare(const long& n);
 //     If the required element is found, the index of one of its occurrences.
 //     Otherwise, -1.
 int BinarySearchRangeModif(
-    long start, long end, const long& target,
-    const std::function<long(const long&)>& modif = [](const long& x) -> long {
-        return x;
-    });
+    long start, long end, const long target,
+    long (*modif)(long) = [](long x) { return x; });
 
 // Main Execution
 
@@ -32,13 +30,12 @@ int main(int argc, char* argv[]) {
 
 // Functions
 
-bool IsPerfectSquare(const long& n) {
-    std::function<long(long)> SquareLong = [](long x) -> long { return x * x; };
+bool IsPerfectSquare(long n) {
+    long (*SquareLong)(long) = [](long x) -> long { return x * x; };
     return BinarySearchRangeModif(1, n, n, SquareLong) != -1;
 }
 
-int BinarySearchRangeModif(long start, long end, const long& target,
-                           const std::function<long(const long&)>& modif) {
+int BinarySearchRangeModif(long start, long end, const long target, long (*modif)(long)) {
     while (start <= end) {
         long middle = (start + end) / 2;
         long midpoint = modif(middle);
