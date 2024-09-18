@@ -9,7 +9,7 @@ import sys
 
 def is_happy_cached(n: int, cache: dict[int, bool]) -> bool:
     seen = set()
-    happiness = None
+    happiness = False
     while n not in seen:
         if n in cache:
             happiness = cache[n]
@@ -18,8 +18,8 @@ def is_happy_cached(n: int, cache: dict[int, bool]) -> bool:
         seen.add(n)
         n = sum([x * x for x in [int(char) for char in str(n)]])
 
-    if happiness is None:
-        happiness = n == 1
+    if n == 1:
+        happiness = True
 
     for s in seen:
         cache[s] = happiness
@@ -38,3 +38,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# vim: set sts=4 sw=4 ts=8 expandtab ft=python:
