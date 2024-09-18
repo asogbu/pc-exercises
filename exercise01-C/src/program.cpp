@@ -8,12 +8,9 @@ int main(int argc, char *argv[]) {
     int duplicates = 0;
     std::unordered_set<int> seen_numbers;
 
-    std::string line;
-    while (std::getline(std::cin, line)) {
-        if (!seen_numbers.insert(std::stoi(line)).second) {
-            duplicates++;
-        }
-    }
+    int n;
+    while (std::cin >> n)
+        if (!seen_numbers.insert(n).second) duplicates++;
 
     std::cout << duplicates << '\n';
 
