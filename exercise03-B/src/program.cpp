@@ -1,6 +1,7 @@
 // Exercise 03-B: Largest Number
 
 #include <algorithm>
+#include <cctype>
 #include <iostream>
 #include <istream>
 #include <string>
@@ -46,22 +47,19 @@ bool ReadNumbers(std::istream& input, std::vector<std::string>& numbers) {
 }
 
 void SplitString(const std::string& s, std::vector<std::string>& result) {
-    std::string::size_type left = 0;
-    while (left < s.length()) {
-        const char* whitespace = " \f\n\r\t\v";
-        left = s.find_first_not_of(whitespace, left);
-        if (left >= s.length()) break;
-        std::string::size_type right = s.find_first_of(whitespace, left + 1);
-        result.push_back(s.substr(left, right - left));
+    auto left = s.begin();
+    int (*IsSpace)(int) = std::isspace;
+    while (left < s.end()) {
+        left = std::find_if_not(left, s.end(), IsSpace);
+        if (left == s.end()) break;
+        auto right = std::find_if(left + 1, s.end(), IsSpace);
+        result.emplace_back(left, right);
         left = right;
     }
 }
 
 bool CompareNumbersOrder(const std::string& a, const std::string& b) {
-    int ab = std::stoi(a + b);
-    int ba = std::stoi(b + a);
-
-    return (ab - ba) < 0;
+    return (a + b) < (b + a);
 }
 
 // vim: set sts=4 sw=4 ts=8 ft=cpp:
