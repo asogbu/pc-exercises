@@ -9,10 +9,10 @@ import sys
 
 
 def compare_numbers(a: str, b: str) -> int:
-    ab = int(a + b)
-    ba = int(b + a)
+    ab = a + b
+    ba = b + a
 
-    return ab - ba
+    return 0 if ab == ba else -1 if ab < ba else 1
 
 
 # Main execution
